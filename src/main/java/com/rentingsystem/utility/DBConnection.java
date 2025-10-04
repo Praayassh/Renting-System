@@ -1,4 +1,4 @@
-package com.rentingsystem.utils;
+package com.rentingsystem.utility;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

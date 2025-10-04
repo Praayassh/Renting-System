@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 </head>
 <body>
+    <jsp:include page="/WEB-INF/pages/header.jsp" />
     <div class="login-container">
         <h2>Login</h2>
         <form action="${pageContext.request.contextPath}/" method="post">
@@ -16,6 +17,24 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
+
+            <%
+                String registrationSuccessMessage = (String) request.getAttribute("registrationSuccessMessage");
+                if (registrationSuccessMessage != null) {
+            %>
+                <p style="color:green;"><%= registrationSuccessMessage %></p>
+            <%
+                }
+            %>
+
+            <%
+                String loginMessage = (String) request.getAttribute("loginMessage");
+                if (loginMessage != null) {
+            %>
+                <p style="color:blue;"><%= loginMessage %></p>
+            <%
+                }
+            %>
 
             <%
                 String errorMessage = (String) request.getAttribute("errorMessage");

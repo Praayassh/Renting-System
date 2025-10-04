@@ -1,6 +1,7 @@
 package com.rentingsystem.controller;
 
-import com.rentingsystem.utils.DBConnection;
+import com.rentingsystem.dao.UserDAO;
+import com.rentingsystem.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,13 +9,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
+    private UserDAO userDAO;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        userDAO = new UserDAO();
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
@@ -60,55 +65,30 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        Connection conn = null;
-        PreparedStatement checkUserStmt = null;
-        PreparedStatement insertUserStmt = null;
-        ResultSet rs = null;
-
-        try {
-            conn = DBConnection.getConnection();
-
-            String checkUserSql = "SELECT * FROM users WHERE username = ? OR email = ? OR phone = ?";
-            checkUserStmt = conn.prepareStatement(checkUserSql);
-            checkUserStmt.setString(1, username);
-            checkUserStmt.setString(2, email);
-            checkUserStmt.setString(3, phone);
-            rs = checkUserStmt.executeQuery();
-
-            if (rs.next()) {
-                request.setAttribute("errorMessage", "Username, email, or phone number already exists.");
-                doGet(request, response);
-            } else {
-                String insertUserSql = "INSERT INTO users (name, username, email, phone, password) VALUES (?, ?, ?, ?, ?)";
-                insertUserStmt = conn.prepareStatement(insertUserSql);
-                insertUserStmt.setString(1, name);
-                insertUserStmt.setString(2, username);
-                insertUserStmt.setString(3, email);
-                insertUserStmt.setString(4, phone);
-                insertUserStmt.setString(5, password);
-
-                int rowsAffected = insertUserStmt.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    response.sendRedirect(request.getContextPath() + "/registration-success");
-                } else {
-                    request.setAttribute("errorMessage", "Registration failed. Please try again.");
-                    doGet(request, response);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            request.setAttribute("errorMessage", "A database error occurred.");
+        // Check if user already exists with specific messages
+        if (userDAO.getUserByUsernameOrEmailOrPhone(username) != null) {
+            request.setAttribute("errorMessage", "Username already exists.");
             doGet(request, response);
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (checkUserStmt != null) checkUserStmt.close();
-                if (insertUserStmt != null) insertUserStmt.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            return;
+        }
+        if (userDAO.getUserByUsernameOrEmailOrPhone(email) != null) {
+            request.setAttribute("errorMessage", "Email already exists.");
+            doGet(request, response);
+            return;
+        }
+        if (phone != null && !phone.isEmpty() && userDAO.getUserByUsernameOrEmailOrPhone(phone) != null) {
+            request.setAttribute("errorMessage", "Phone number already exists.");
+            doGet(request, response);
+            return;
+        }
+
+        User newUser = new User(name, username, email, phone, password);
+        if (userDAO.addUser(newUser)) {
+            request.getSession().setAttribute("registrationSuccessMessage", "Registration successful! Please log in.");
+            response.sendRedirect(request.getContextPath() + "/");
+        } else {
+            request.setAttribute("errorMessage", "Registration failed. Please try again.");
+            doGet(request, response);
         }
     }
 }

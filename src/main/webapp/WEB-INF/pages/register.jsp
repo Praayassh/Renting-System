@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css">
 </head>
 <body>
+    <jsp:include page="/WEB-INF/pages/header.jsp" />
     <div class="registration-container">
         <h2>Create Account</h2>
 

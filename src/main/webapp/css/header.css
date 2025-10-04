@@ -75,11 +75,15 @@ body, html {
     border: 1px solid #ccc;
     border-radius: 20px;
     background-color: #f0f0f0;
-    padding: 5px 15px;
+    padding: 8px 15px; 
+    height: 40px;
+    min-width: 80px;
+    box-sizing: border-box;
 }
 
 .header__link span {
     margin-left: 8px;
+    font-size: 16px;
 }
 
 .header__link:hover {
@@ -88,4 +92,5 @@ body, html {
 
 .material-icons {
     color: #606060;
+    font-size: 24px;
 }

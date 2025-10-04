@@ -17,7 +17,7 @@
             </button>
         </div>
         <div class="header__right">
-            <a href="#" class="header__link">
+<a href="${pageContext.request.contextPath}/postProperty" class="header__link">
                 <i class="material-icons">store</i>
                 <span>Post</span>
             </a>

@@ -24,7 +24,7 @@
                 <i class="material-icons">store</i>
                 <span>Post</span>
             </a>
-            <a href="#" class="header__link" title="Settings">
+            <a href="${pageContext.request.contextPath}/settings" class="header__link" title="Settings">
                 <i class="material-icons">settings</i>
             </a>
         </div>

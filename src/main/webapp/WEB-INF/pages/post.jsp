@@ -11,7 +11,7 @@
     <jsp:include page="/WEB-INF/pages/header.jsp" />
 
     <div class="container">
-        <h2>Post New Property</h2>
+        <h2>Post New Property for Rent</h2>
 
         <%
             String errorMessage = (String) request.getAttribute("errorMessage");
@@ -44,13 +44,19 @@
             </div>
 
             <div class="form-group">
-                <label for="price">Price</label>
-                <input type="number" id="price" name="price" value="${price}" step="0.01" required>
+                <label for="currency">Currency</label>
+                <select id="currency" name="currency">
+                    <option value="NPR" ${"NPR".equals(request.getAttribute("currency")) ? "selected" : ""}>NPR - Nepalese Rupee</option>
+                    <option value="USD" ${"USD".equals(request.getAttribute("currency")) ? "selected" : ""}>USD - US Dollar</option>
+                    <option value="EUR" ${"EUR".equals(request.getAttribute("currency")) ? "selected" : ""}>EUR - Euro</option>
+                    <option value="GBP" ${"GBP".equals(request.getAttribute("currency")) ? "selected" : ""}>GBP - British Pound</option>
+                    <option value="INR" ${"INR".equals(request.getAttribute("currency")) ? "selected" : ""}>INR - Indian Rupee</option>
+                </select>
             </div>
 
             <div class="form-group">
-                <label for="currency">Currency</label>
-                <input type="text" id="currency" name="currency" value="${currency != null ? currency : 'NPR'}">
+                <label for="price">Price</label>
+                <input type="number" id="price" name="price" value="${price}" step="0.01" required>
             </div>
 
             <div class="form-group">
@@ -63,7 +69,7 @@
                 <input type="file" id="imageFiles" name="imageFiles" multiple accept="image/*">
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group--submit">
                 <button type="submit">Post Property</button>
             </div>
         </form>

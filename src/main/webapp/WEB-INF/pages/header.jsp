@@ -15,13 +15,16 @@
             <button class="header__search-button">
                 <i class="material-icons">search</i>
             </button>
+            <button class="header__filter-button" title="Filter">
+                <i class="material-icons">filter_alt</i>
+            </button>
         </div>
         <div class="header__right">
 <a href="${pageContext.request.contextPath}/postProperty" class="header__link">
                 <i class="material-icons">store</i>
                 <span>Post</span>
             </a>
-            <a href="#" class="header__link">
+            <a href="#" class="header__link" title="Settings">
                 <i class="material-icons">settings</i>
             </a>
         </div>

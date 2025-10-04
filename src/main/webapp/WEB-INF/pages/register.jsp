@@ -6,11 +6,11 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/pages/header.jsp" />
-    <div class="registration-wrapper">
-        <div class="registration-form-section">
-            <h2>Create Account</h2>
+    <div class="registration-container">
+        <h2>Create Account</h2>
 
-            <form action="${pageContext.request.contextPath}/register" method="post">
+        <form action="${pageContext.request.contextPath}/register" method="post">
+            <div class="registration-form-grid">
                 <div class="registration-form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" value="${name}" required>
@@ -35,7 +35,23 @@
                     <label for="confirm_password">Confirm Password</label>
                     <input type="password" id="confirm_password" name="confirm_password" required>
                 </div>
+            </div>
 
+            <div class="registration-form-group registration-form-group--security-question">
+                <label for="securityQuestion">Security Question</label>
+                <select id="securityQuestion" name="securityQuestion" required>
+                    <option value="">Select a security question</option>
+                    <option value="pet">What was the name of your first pet?</option>
+                    <option value="mother">What is your mother's maiden name?</option>
+                    <option value="city">What city were you born in?</option>
+                </select>
+            </div>
+            <div class="registration-form-group">
+                <label for="securityAnswer">Answer</label>
+                <input type="text" id="securityAnswer" name="securityAnswer" required>
+            </div>
+
+            <div class="message-container">
                 <%
                     String errorMessage = (String) request.getAttribute("errorMessage");
                     if (errorMessage != null) {
@@ -44,17 +60,14 @@
                 <%
                     }
                 %>
-
-                <div class="registration-form-group">
-                    <button type="submit">Register</button>
-                </div>
-            </form>
-            <div class="registration-links">
-                <a href="${pageContext.request.contextPath}/">Already have an account?</a>
             </div>
-        </div>
-        <div class="registration-image-section">
-            <img src="${pageContext.request.contextPath}/images/register_image.png" alt="Register Image">
+
+            <div class="registration-form-group">
+                <button type="submit">Register</button>
+            </div>
+        </form>
+        <div class="registration-links">
+            <a href="${pageContext.request.contextPath}/">Already have an account?</a>
         </div>
     </div>
 </body>

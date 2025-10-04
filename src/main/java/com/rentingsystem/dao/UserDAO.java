@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class UserDAO {
 
     public User getUserByUsernameOrEmailOrPhone(String identifier) {
-        String sql = "SELECT id, name, username, email, phone, password FROM users WHERE username = ? OR email = ? OR phone = ?";
+        String sql = "SELECT id, name, username, email, phone, password, security_question, security_answer FROM users WHERE username = ? OR email = ? OR phone = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, identifier);
@@ -26,6 +26,8 @@ public class UserDAO {
                     user.setEmail(rs.getString("email"));
                     user.setPhone(rs.getString("phone"));
                     user.setPassword(rs.getString("password"));
+                    user.setSecurityQuestion(rs.getString("security_question"));
+                    user.setSecurityAnswer(rs.getString("security_answer"));
                     return user;
                 }
             }
@@ -36,7 +38,7 @@ public class UserDAO {
     }
 
     public boolean addUser(User user) {
-        String sql = "INSERT INTO users (name, username, email, phone, password) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (name, username, email, phone, password, security_question, security_answer) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user.getName());
@@ -44,6 +46,8 @@ public class UserDAO {
             stmt.setString(3, user.getEmail());
             stmt.setString(4, user.getPhone());
             stmt.setString(5, user.getPassword());
+            stmt.setString(6, user.getSecurityQuestion());
+            stmt.setString(7, user.getSecurityAnswer());
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
@@ -62,7 +66,7 @@ public class UserDAO {
     }
 
     public User getUserById(int userId) {
-        String sql = "SELECT id, name, username, email, phone, password FROM users WHERE id = ?";
+        String sql = "SELECT id, name, username, email, phone, password, security_question, security_answer FROM users WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, userId);
@@ -75,6 +79,8 @@ public class UserDAO {
                     user.setEmail(rs.getString("email"));
                     user.setPhone(rs.getString("phone"));
                     user.setPassword(rs.getString("password"));
+                    user.setSecurityQuestion(rs.getString("security_question"));
+                    user.setSecurityAnswer(rs.getString("security_answer"));
                     return user;
                 }
             }

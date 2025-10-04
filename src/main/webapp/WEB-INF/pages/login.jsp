@@ -51,7 +51,7 @@
                 </div>
             </form>
             <div class="login-links">
-                <a href="${pageContext.request.contextPath}/forgot-password">Forgot Password?</a>
+                <a href="${pageContext.request.contextPath}/forgotPassword">Forgot Password?</a>
                 |
                 <a href="${pageContext.request.contextPath}/register">Register</a>
             </div>

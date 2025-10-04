@@ -33,13 +33,17 @@ public class RegisterServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirm_password");
+        String securityQuestion = request.getParameter("securityQuestion");
+        String securityAnswer = request.getParameter("securityAnswer");
 
         request.setAttribute("name", name);
         request.setAttribute("username", username);
         request.setAttribute("email", email);
         request.setAttribute("phone", phone);
+        request.setAttribute("securityQuestion", securityQuestion);
+        request.setAttribute("securityAnswer", securityAnswer);
 
-        if (username == null || username.isEmpty() || email == null || email.isEmpty() || password == null || password.isEmpty() || name == null || name.isEmpty()) {
+        if (username == null || username.isEmpty() || email == null || email.isEmpty() || password == null || password.isEmpty() || name == null || name.isEmpty() || securityQuestion == null || securityQuestion.isEmpty() || securityAnswer == null || securityAnswer.isEmpty()) {
             request.setAttribute("errorMessage", "Please fill out all required fields.");
             doGet(request, response);
             return;
@@ -60,7 +64,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
         if (!password.matches("^(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$")) {
-            request.setAttribute("errorMessage", "Password must be at least 8 characters and include at least one letter and one number.");
+            request.setAttribute("errorMessage", "Password: 8+ characters, with letters and numbers.");
             doGet(request, response);
             return;
         }
@@ -82,7 +86,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        User newUser = new User(name, username, email, phone, password);
+        User newUser = new User(name, username, email, phone, password, securityQuestion, securityAnswer);
         if (userDAO.addUser(newUser)) {
             request.getSession().setAttribute("registrationSuccessMessage", "Registration successful! Please log in.");
             response.sendRedirect(request.getContextPath() + "/");

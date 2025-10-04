@@ -11,7 +11,9 @@
 <body>
     <header class="header">
         <div class="header__left">
-            <img class="header__logo" src="${pageContext.request.contextPath}/images/logo.png" alt="Logo">
+            <a href="">
+                <img class="header__logo" src="${pageContext.request.contextPath}/images/logo.png" alt="Logo">
+            </a>
         </div>
         <div class="header__center">
             <input type="text" class="header__search-input" placeholder="Search">

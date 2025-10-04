@@ -68,7 +68,7 @@ public class ChangePasswordServlet extends HttpServlet {
             return;
         }
         if (!newPassword.matches("^(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$")) {
-            request.setAttribute("errorMessage", "New password must be at least 8 characters and include at least one letter and one number.");
+            request.setAttribute("errorMessage", "Password: 8+ characters, with letters and numbers.");
             doGet(request, response);
             return;
         }

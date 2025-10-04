@@ -7,25 +7,31 @@ public class User {
     private String email;
     private String phone;
     private String password;
+    private String securityQuestion;
+    private String securityAnswer;
 
     public User() {
     }
 
-    public User(int id, String name, String username, String email, String phone, String password) {
+    public User(int id, String name, String username, String email, String phone, String password, String securityQuestion, String securityAnswer) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.securityQuestion = securityQuestion;
+        this.securityAnswer = securityAnswer;
     }
 
-    public User(String name, String username, String email, String phone, String password) {
+    public User(String name, String username, String email, String phone, String password, String securityQuestion, String securityAnswer) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.securityQuestion = securityQuestion;
+        this.securityAnswer = securityAnswer;
     }
 
     public int getId() {
@@ -74,5 +80,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSecurityQuestion() {
+        return securityQuestion;
+    }
+
+    public void setSecurityQuestion(String securityQuestion) {
+        this.securityQuestion = securityQuestion;
+    }
+
+    public String getSecurityAnswer() {
+        return securityAnswer;
+    }
+
+    public void setSecurityAnswer(String securityAnswer) {
+        this.securityAnswer = securityAnswer;
     }
 }

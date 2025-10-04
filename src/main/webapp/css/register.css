@@ -14,67 +14,88 @@ body {
     min-height: 100vh;
     box-sizing: border-box;
     width: 100%;
-}
-.registration-wrapper {
-    background-color: #ffffff;
-    border-radius: 15px; /* More rounded corners */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* More prominent shadow */
-    width: 100%;
-    max-width: 1000px; /* Overall wider container */
-    margin: 80px auto;
-    display: flex;
-    overflow: hidden;
-    min-height: 700px; /* Increased height */
-}
-.registration-form-section {
-    flex: 0 0 50%;
-    padding: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
+    align-items: center; /* Centers horizontally */
+    justify-content: center; /* Centers vertically */
 }
-.registration-image-section {
-    flex: 0 0 50%;
-    background-color: #f0f2f5;
+.registration-container {
+    background-color: #fcfcfc;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 1400px;
+    margin: auto; /* Let flex handle vertical spacing, auto for horizontal */
+    padding: 40px;
+    box-sizing: border-box;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    box-sizing: border-box;
+    min-height: 700px;
+    font-size: 1.1em;
 }
-.registration-form-section h2 {
+h2 {
     text-align: center;
     color: #222222;
-    margin-bottom: 40px; /* Increased margin-bottom */
+    margin-bottom: 40px;
     font-size: 1.8em;
     font-weight: 700;
 }
+.registration-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px 40px;
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 10px; /* Reduced gap */
+}
+
+.registration-form-group--security-question {
+    margin-top: 0; /* Removed gap */
+}
 .registration-form-group {
-    margin-bottom: 18px;
+    margin-bottom: 15px; /* Increased margin-bottom for all form groups */
     width: 100%; /* Ensure form group takes full width of its parent */
-    max-width: 350px; /* Constrain input width */
+    max-width: 700px; /* Constrain input width to match grid max-width */
+}
+.registration-form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #333333;
+    font-weight: 600;
+    font-size: 1em;
 }
 .registration-form-group input[type="text"],
 .registration-form-group input[type="email"],
 .registration-form-group input[type="tel"],
-.registration-form-group input[type="password"] {
+.registration-form-group input[type="password"],
+.registration-form-group select { /* Added select here */
     width: 100%;
-    padding: 12px 15px; /* Increased padding */
+    padding: 12px 15px;
     border: 1px solid #cccccc;
-    border-radius: 8px; /* More rounded input boxes */
+    border-radius: 8px;
     font-size: 1.05em;
     box-sizing: border-box;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
+.registration-form-group input[type="text"]:focus,
+.registration-form-group input[type="email"]:focus,
+.registration-form-group input[type="tel"]:focus,
+.registration-form-group input[type="password"]:focus,
+.registration-form-group select:focus {
+    border-color: #888888;
+    box-shadow: 0 0 0 2px rgba(136, 136, 136, 0.2);
+    outline: none;
+}
+
 .registration-form-group button {
     width: 100%;
     padding: 14px;
     background-color: #000000;
     color: #fff;
     border: none;
-    border-radius: 8px; /* More rounded button */
+    border-radius: 8px;
     font-size: 1.1em;
     cursor: pointer;
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
@@ -86,7 +107,7 @@ body {
 }
 .registration-links {
     text-align: center;
-    margin-top: 10px; /* Reduced gap */
+    margin-top: 20px;
     font-size: 0.9em;
 }
 .registration-links a {

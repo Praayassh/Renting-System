@@ -3,7 +3,7 @@
 <%@ page import="com.rentingsystem.model.Property" %>
 <html>
 <head>
-    <title>Post History</title>
+    <title>Saved Posts</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -20,11 +20,11 @@
                 <i class="material-icons">person</i>
                 <span>Profile</span>
             </a>
-            <a href="${pageContext.request.contextPath}/settings/postHistory" class="settings-menu-item active">
+            <a href="${pageContext.request.contextPath}/settings/postHistory" class="settings-menu-item">
                 <i class="material-icons">history</i>
                 <span>Post History</span>
             </a>
-            <a href="${pageContext.request.contextPath}/settings/savedPosts" class="settings-menu-item">
+            <a href="${pageContext.request.contextPath}/settings/savedPosts" class="settings-menu-item active">
                 <i class="material-icons">bookmark</i>
                 <span>Saved Posts</span>
             </a>
@@ -38,13 +38,13 @@
             </a>
         </div>
         <div class="settings-content">
-            <h3>Your Post History</h3>
+            <h3>Your Saved Posts</h3>
             <%
-                List<Property> postedProperties = (List<Property>) request.getAttribute("postedProperties");
-                if (postedProperties != null && !postedProperties.isEmpty()) {
+                List<Property> savedProperties = (List<Property>) request.getAttribute("savedProperties");
+                if (savedProperties != null && !savedProperties.isEmpty()) {
             %>
                 <div class="property-list">
-                    <% for (Property property : postedProperties) { %>
+                    <% for (Property property : savedProperties) { %>
                         <div class="property-card">
                             <a href="${pageContext.request.contextPath}/propertyDetails?propertyId=<%= property.getId() %>" class="card-overlay-link"></a>
                             <%
@@ -66,41 +66,47 @@
                                 <p><strong>Posted:</strong> <%= property.getPostedDate() %></p>
                             </div>
                             <div class="property-card-actions">
-                                <%
-                                    if ("available".equalsIgnoreCase(property.getStatus())) {
-                                %>
-                                    <form action="${pageContext.request.contextPath}/updateStatus" method="post" style="display: inline-block;" onclick="event.stopPropagation();">
-                                        <input type="hidden" name="propertyId" value="<%= property.getId() %>">
-                                        <input type="hidden" name="status" value="unavailable">
-                                        <button type="submit" class="unavailable-button">Mark as Unavailable</button>
-                                    </form>
-                                <%
-                                    } else {
-                                %>
-                                    <form action="${pageContext.request.contextPath}/updateStatus" method="post" style="display: inline-block;" onclick="event.stopPropagation();">
-                                        <input type="hidden" name="propertyId" value="<%= property.getId() %>">
-                                        <input type="hidden" name="status" value="available">
-                                        <button type="submit" class="available-button">Mark as Available</button>
-                                    </form>
-                                <%
-                                    }
-                                %>
-                                <form action="${pageContext.request.contextPath}/deleteProperty" method="post" onsubmit="return confirm('Are you sure you want to delete this post?');" style="display: inline-block;" onclick="event.stopPropagation();">
-                                    <input type="hidden" name="propertyId" value="<%= property.getId() %>">
-                                    <button type="submit" class="delete-button">Delete</button>
-                                </form>
+                                <button type="button" class="delete-button" onclick="event.stopPropagation(); alert('Unsave successful'); unsavePost(<%= property.getId() %>, this)">Unsave</button>
                             </div>
                         </div>
-                <% } %>
+                    <% } %>
                 </div>
             <%
                 } else {
             %>
-                <p class="no-posts">You haven't posted any properties yet.</p>
+                <p class="no-posts">You haven't saved any posts yet.</p>
             <%
                 }
             %>
         </div>
     </div>
+
+    <script>
+        function unsavePost(propertyId, buttonElement) {
+            console.log('unsavePost called for propertyId:', propertyId);
+            fetch('${pageContext.request.contextPath}/unsavePost', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'propertyId=' + propertyId
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Post unsaved!');
+                    const card = buttonElement.closest('.property-card');
+                    if (card) {
+                        card.remove();
+                    }
+                } else {
+                    console.error('Error unsaving post:', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
 </html>

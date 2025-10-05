@@ -70,6 +70,6 @@ body {
     border: 1px solid #eee;
     border-radius: 8px;
     background-color: #fff;
-    max-height: calc(100vh - 250px); /* Adjust based on header/footer height */
+    max-height: calc(100vh - 250px);
     overflow-y: auto;
 }

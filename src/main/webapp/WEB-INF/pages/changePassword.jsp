@@ -3,7 +3,7 @@
 <head>
     <title>Change Password</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/settings.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/changePassword.css">

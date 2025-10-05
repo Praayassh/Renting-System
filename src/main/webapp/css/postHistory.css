@@ -56,6 +56,8 @@
     background-color: #f9f9f9;
     border-top: 1px solid #eee;
     text-align: right;
+    position: relative;
+    z-index: 2;
 }
 
 .delete-button {
@@ -106,4 +108,22 @@
 
 .available-button:hover {
     background-color: #27ae60;
+}
+
+.property-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.property-card {
+    position: relative;
+}
+
+.card-overlay-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
 }

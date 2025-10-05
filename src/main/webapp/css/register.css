@@ -16,8 +16,8 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers horizontally */
-    justify-content: center; /* Centers vertically */
+    align-items: center;
+    justify-content: center;
 }
 .registration-container {
     background-color: #fcfcfc;
@@ -25,7 +25,7 @@ body {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     width: 100%;
     max-width: 1400px;
-    margin: auto; /* Let flex handle vertical spacing, auto for horizontal */
+    margin: auto;
     padding: 40px;
     box-sizing: border-box;
     display: flex;
@@ -48,16 +48,16 @@ h2 {
     gap: 1px 40px;
     width: 100%;
     max-width: 700px;
-    margin-bottom: 10px; /* Reduced gap */
+    margin-bottom: 10px;
 }
 
 .registration-form-group--security-question {
-    margin-top: 0; /* Removed gap */
+    margin-top: 0;
 }
 .registration-form-group {
-    margin-bottom: 15px; /* Increased margin-bottom for all form groups */
-    width: 100%; /* Ensure form group takes full width of its parent */
-    max-width: 700px; /* Constrain input width to match grid max-width */
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 700px;
 }
 .registration-form-group label {
     display: block;
@@ -70,7 +70,7 @@ h2 {
 .registration-form-group input[type="email"],
 .registration-form-group input[type="tel"],
 .registration-form-group input[type="password"],
-.registration-form-group select { /* Added select here */
+.registration-form-group select {
     width: 100%;
     padding: 12px 15px;
     border: 1px solid #cccccc;

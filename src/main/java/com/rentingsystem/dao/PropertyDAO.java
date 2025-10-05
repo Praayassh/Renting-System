@@ -120,4 +120,116 @@ public class PropertyDAO {
         }
         return false;
     }
+
+    public List<Property> getFilteredProperties(String location, String type) {
+        List<Property> properties = new ArrayList<>();
+        StringBuilder sql = new StringBuilder("SELECT id, user_id, title, description, type, price, currency, location, image_urls, posted_date, status FROM properties WHERE 1=1");
+
+        if (location != null && !location.isEmpty()) {
+            sql.append(" AND location = ?");
+        }
+        if (type != null && !type.isEmpty()) {
+            sql.append(" AND type = ?");
+        }
+        sql.append(" ORDER BY posted_date DESC");
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
+
+            int paramIndex = 1;
+            if (location != null && !location.isEmpty()) {
+                stmt.setString(paramIndex++, location);
+            }
+            if (type != null && !type.isEmpty()) {
+                stmt.setString(paramIndex++, type);
+            }
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Property property = new Property();
+                    property.setId(rs.getInt("id"));
+                    property.setUserId(rs.getInt("user_id"));
+                    property.setTitle(rs.getString("title"));
+                    property.setDescription(rs.getString("description"));
+                    property.setType(rs.getString("type"));
+                    property.setPrice(rs.getDouble("price"));
+                    property.setCurrency(rs.getString("currency"));
+                    property.setLocation(rs.getString("location"));
+                    property.setImageUrls(rs.getString("image_urls"));
+                    property.setPostedDate(rs.getTimestamp("posted_date"));
+                    property.setStatus(rs.getString("status"));
+                    properties.add(property);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return properties;
+    }
+
+    public Property getPropertyById(int propertyId) {
+        String sql = "SELECT id, user_id, title, description, type, price, currency, location, image_urls, posted_date, status FROM properties WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, propertyId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Property property = new Property();
+                    property.setId(rs.getInt("id"));
+                    property.setUserId(rs.getInt("user_id"));
+                    property.setTitle(rs.getString("title"));
+                    property.setDescription(rs.getString("description"));
+                    property.setType(rs.getString("type"));
+                    property.setPrice(rs.getDouble("price"));
+                    property.setCurrency(rs.getString("currency"));
+                    property.setLocation(rs.getString("location"));
+                    property.setImageUrls(rs.getString("image_urls"));
+                    property.setPostedDate(rs.getTimestamp("posted_date"));
+                    property.setStatus(rs.getString("status"));
+                    return property;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Property> searchProperties(String searchQuery) {
+        List<Property> properties = new ArrayList<>();
+        StringBuilder sql = new StringBuilder("SELECT id, user_id, title, description, type, price, currency, location, image_urls, posted_date, status FROM properties WHERE");
+        sql.append(" title LIKE ? OR description LIKE ? OR location LIKE ? OR type LIKE ?");
+        sql.append(" ORDER BY posted_date DESC");
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
+
+            String searchPattern = "%" + searchQuery + "%";
+            stmt.setString(1, searchPattern);
+            stmt.setString(2, searchPattern);
+            stmt.setString(3, searchPattern);
+            stmt.setString(4, searchPattern);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Property property = new Property();
+                    property.setId(rs.getInt("id"));
+                    property.setUserId(rs.getInt("user_id"));
+                    property.setTitle(rs.getString("title"));
+                    property.setDescription(rs.getString("description"));
+                    property.setType(rs.getString("type"));
+                    property.setPrice(rs.getDouble("price"));
+                    property.setCurrency(rs.getString("currency"));
+                    property.setLocation(rs.getString("location"));
+                    property.setImageUrls(rs.getString("image_urls"));
+                    property.setPostedDate(rs.getTimestamp("posted_date"));
+                    property.setStatus(rs.getString("status"));
+                    properties.add(property);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return properties;
+    }
 }

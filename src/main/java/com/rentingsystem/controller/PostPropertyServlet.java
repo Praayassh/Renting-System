@@ -60,7 +60,6 @@ public class PostPropertyServlet extends HttpServlet {
         String currency = request.getParameter("currency");
         String location = request.getParameter("location");
 
-        // --- File Upload Handling ---
         List<String> imageUrlsList = new ArrayList<>();
         String applicationPath = request.getServletContext().getRealPath("");
         String uploadFilePath = applicationPath + UPLOAD_DIRECTORY;
@@ -93,7 +92,6 @@ public class PostPropertyServlet extends HttpServlet {
             return;
         }
         String imageUrls = String.join(",", imageUrlsList);
-        // --- End File Upload Handling ---
 
         if (title == null || title.isEmpty() || type == null || type.isEmpty() || priceStr == null || priceStr.isEmpty()) {
             request.setAttribute("errorMessage", "Title, Type, and Price are required fields.");

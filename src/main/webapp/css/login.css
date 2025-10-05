@@ -35,7 +35,7 @@ body {
     align-items: center;
     box-sizing: border-box;
     font-size: 1.1em;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05); /* Subtle shadow on the right */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
 }
 .login-image-section {
     flex: 0 0 50%;
@@ -49,21 +49,21 @@ body {
 .login-form-section h2 {
     text-align: center;
     color: #222222;
-    margin-bottom: 40px; /* Increased margin-bottom */
+    margin-bottom: 40px;
     font-size: 1.8em;
     font-weight: 700;
 }
 .login-form-group {
-    margin-bottom: 28px; /* Increased gap */
+    margin-bottom: 28px;
     width: 100%;
     max-width: 350px;
 }
 .login-form-group input[type="text"],
 .login-form-group input[type="password"] {
     width: 100%;
-    padding: 12px 15px; /* Increased padding */
+    padding: 12px 15px;
     border: 1px solid #cccccc;
-    border-radius: 8px; /* More rounded input boxes */
+    border-radius: 8px;
     font-size: 1.05em;
     box-sizing: border-box;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;

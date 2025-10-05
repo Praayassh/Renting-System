@@ -45,7 +45,6 @@ public class ChangePasswordServlet extends HttpServlet {
         String newPassword = request.getParameter("newPassword");
         String confirmNewPassword = request.getParameter("confirmNewPassword");
 
-        // Fetch user to verify current password
         User user = userDAO.getUserById(userId);
 
         if (user == null) {
@@ -54,14 +53,12 @@ public class ChangePasswordServlet extends HttpServlet {
             return;
         }
 
-        // Verify current password
         if (!user.getPassword().equals(currentPassword)) {
             request.setAttribute("errorMessage", "Incorrect current password.");
             doGet(request, response);
             return;
         }
 
-        // Validate new password
         if (newPassword == null || newPassword.isEmpty() || !newPassword.equals(confirmNewPassword)) {
             request.setAttribute("errorMessage", "New passwords do not match or are empty.");
             doGet(request, response);
@@ -73,7 +70,6 @@ public class ChangePasswordServlet extends HttpServlet {
             return;
         }
 
-        // Update password
         if (userDAO.updateUserPassword(userId, newPassword)) {
             request.setAttribute("successMessage", "Password updated successfully!");
             doGet(request, response);

@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/home")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/search")
+public class SearchServlet extends HttpServlet {
     private PropertyDAO propertyDAO;
 
     @Override
@@ -23,19 +23,17 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String location = request.getParameter("location");
-        String type = request.getParameter("type");
+        String searchQuery = request.getParameter("searchQuery");
 
-        List<Property> properties;
-        if ((location != null && !location.isEmpty()) || (type != null && !type.isEmpty())) {
-            properties = propertyDAO.getFilteredProperties(location, type);
+        List<Property> searchResults;
+        if (searchQuery != null && !searchQuery.isEmpty()) {
+            searchResults = propertyDAO.searchProperties(searchQuery);
         } else {
-            properties = propertyDAO.getAllProperties();
+            searchResults = propertyDAO.getAllProperties();
         }
 
-        request.setAttribute("allProperties", properties);
-        request.setAttribute("selectedLocation", location);
-        request.setAttribute("selectedType", type);
+        request.setAttribute("allProperties", searchResults);
+        request.setAttribute("searchQuery", searchQuery);
         request.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(request, response);
     }
 

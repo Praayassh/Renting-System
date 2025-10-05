@@ -32,6 +32,14 @@ body, html {
     flex: 1;
     margin: 0 40px;
     max-width: 700px;
+    align-items: center;
+}
+
+.header__search-form {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    margin-top: 15px;
 }
 
 .header__search-input {
@@ -41,6 +49,9 @@ body, html {
     border-radius: 40px 0 0 40px;
     outline: none;
     font-size: 16px;
+    height: 40px;
+    box-sizing: border-box;
+    margin: 0;
 }
 
 .header__search-button {
@@ -53,31 +64,22 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 40px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.header__search-button i.material-icons {
+    line-height: 1;
 }
 
 .header__search-button:hover {
     background-color: #f0f0f0;
+    border: 1px solid #888888;
     border-left: none;
     box-shadow: 0 0 0 2px rgba(136, 136, 136, 0.2);
     border-radius: 0 40px 40px 0;
     padding: 0 25px;
-}
-
-.header__filter-button {
-    padding: 0 15px;
-    border: none;
-    background-color: transparent;
-    border-radius: 40px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 10px;
-    height: 40px;
-}
-
-.header__filter-button:hover {
-    background-color: #f0f0f0;
 }
 
 .header__right {

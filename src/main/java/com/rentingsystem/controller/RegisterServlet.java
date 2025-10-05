@@ -69,7 +69,6 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        // Check if user already exists with specific messages
         if (userDAO.getUserByUsernameOrEmailOrPhone(username) != null) {
             request.setAttribute("errorMessage", "Username already exists.");
             doGet(request, response);

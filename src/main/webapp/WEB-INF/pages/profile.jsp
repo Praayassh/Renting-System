@@ -4,27 +4,10 @@
 <head>
     <title>Profile Settings</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/settings.css">
-    <style>
-        .profile-details {
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            border: 1px solid #eee;
-        }
-        .profile-details p {
-            margin-bottom: 10px;
-            font-size: 1.1em;
-            color: #333;
-        }
-        .profile-details p strong {
-            display: inline-block;
-            width: 120px;
-            color: #555;
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css">
 </head>
 <body>
     <jsp:include page="/WEB-INF/pages/header.jsp" />

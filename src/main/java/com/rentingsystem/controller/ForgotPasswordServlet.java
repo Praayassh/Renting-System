@@ -23,7 +23,6 @@ public class ForgotPasswordServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Always start at step 1 for GET requests
         request.setAttribute("currentStep", "step1");
         request.getRequestDispatcher("/WEB-INF/pages/forgotPassword.jsp").forward(request, response);
     }

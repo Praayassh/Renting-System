@@ -3,7 +3,7 @@
 <head>
     <title>Post New Property</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"> <%-- Assuming a general style.css for form styling --%>
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/post.css">
 </head>

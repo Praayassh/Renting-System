@@ -16,13 +16,12 @@
             </a>
         </div>
         <div class="header__center">
-            <input type="text" class="header__search-input" placeholder="Search">
-            <button class="header__search-button">
-                <i class="material-icons">search</i>
-            </button>
-            <button class="header__filter-button" title="Filter">
-                <i class="material-icons">filter_alt</i>
-            </button>
+            <form action="${pageContext.request.contextPath}/search" method="get" class="header__search-form">
+                <input type="text" class="header__search-input" name="searchQuery" placeholder="Search for properties...">
+                <button type="submit" class="header__search-button">
+                    <i class="material-icons">search</i>
+                </button>
+            </form>
         </div>
         <div class="header__right">
 <a href="${pageContext.request.contextPath}/postProperty" class="header__link">

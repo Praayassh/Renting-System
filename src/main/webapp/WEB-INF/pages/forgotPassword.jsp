@@ -3,12 +3,12 @@
 <head>
     <title>Forgot Password</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css"> <%-- Reusing login.css for general form styling --%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 </head>
 <body>
     <jsp:include page="/WEB-INF/pages/header.jsp" />
 
-    <div class="login-wrapper"> <%-- Reusing login-wrapper for consistent styling --%>
+    <div class="login-wrapper">
         <div class="login-form-section">
             <h2 class="forgot-password-heading">Forgot Password</h2>
 

@@ -1,6 +1,6 @@
 package com.rentingsystem.controller;
 
-import com.rentingsystem.dao.PropertyDAO;
+import com.rentingsystem.dao.SavedPostDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,35 +10,36 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/updateStatus")
-public class UpdatePropertyStatusServlet extends HttpServlet {
-    private PropertyDAO propertyDAO;
+@WebServlet("/savePost")
+public class SavePostServlet extends HttpServlet {
+    private SavedPostDAO savedPostDAO;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        propertyDAO = new PropertyDAO();
+        savedPostDAO = new SavedPostDAO();
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(false);
 
         if (session == null || session.getAttribute("userId") == null) {
-            response.sendRedirect(request.getContextPath() + "/");
+            response.getWriter().write("{\"success\": false, \"message\": \"User not logged in.\"}");
             return;
         }
 
         try {
+            int userId = (int) session.getAttribute("userId");
             int propertyId = Integer.parseInt(request.getParameter("propertyId"));
-            String status = request.getParameter("status");
-            propertyDAO.updatePropertyStatus(propertyId, status);
 
-            boolean updated = propertyDAO.updatePropertyStatus(propertyId, status);
-            if (updated) {
-                response.getWriter().write("{\"success\": true, \"message\": \"Property status updated to " + status + ".\"}");
+            boolean saved = savedPostDAO.savePost(userId, propertyId);
+            if (saved) {
+                response.getWriter().write("{\"success\": true, \"message\": \"Post saved successfully.\"}");
             } else {
-                response.getWriter().write("{\"success\": false, \"message\": \"Failed to update property status.\"}");
+                response.getWriter().write("{\"success\": false, \"message\": \"Failed to save post or already saved.\"}");
             }
         } catch (NumberFormatException e) {
             response.getWriter().write("{\"success\": false, \"message\": \"Invalid property ID.\"}");
@@ -47,6 +48,5 @@ public class UpdatePropertyStatusServlet extends HttpServlet {
             response.getWriter().write("{\"success\": false, \"message\": \"An error occurred: " + e.getMessage() + "\"}");
             e.printStackTrace();
         }
-        response.sendRedirect(request.getContextPath() + "/settings/postHistory");
     }
 }

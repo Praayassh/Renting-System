@@ -48,6 +48,10 @@
                 <i class="material-icons">vpn_key</i>
                 <span>Change Password</span>
             </a>
+            <a href="${pageContext.request.contextPath}/logout" class="settings-menu-item">
+                <i class="material-icons">exit_to_app</i>
+                <span>Logout</span>
+            </a>
         </div>
         <div class="settings-content">
             <h3>Your Profile</h3>

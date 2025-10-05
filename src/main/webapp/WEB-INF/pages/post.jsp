@@ -61,7 +61,19 @@
 
             <div class="form-group">
                 <label for="location">Location</label>
-                <input type="text" id="location" name="location" value="${location}">
+                <select id="location" name="location" required>
+                    <option value="">Select a city</option>
+                    <option value="Kathmandu" ${"Kathmandu".equals(request.getAttribute("location")) ? "selected" : ""}>Kathmandu</option>
+                    <option value="Pokhara" ${"Pokhara".equals(request.getAttribute("location")) ? "selected" : ""}>Pokhara</option>
+                    <option value="Lalitpur" ${"Lalitpur".equals(request.getAttribute("location")) ? "selected" : ""}>Lalitpur</option>
+                    <option value="Bhaktapur" ${"Bhaktapur".equals(request.getAttribute("location")) ? "selected" : ""}>Bhaktapur</option>
+                    <option value="Biratnagar" ${"Biratnagar".equals(request.getAttribute("location")) ? "selected" : ""}>Biratnagar</option>
+                    <option value="Birgunj" ${"Birgunj".equals(request.getAttribute("location")) ? "selected" : ""}>Birgunj</option>
+                    <option value="Dharan" ${"Dharan".equals(request.getAttribute("location")) ? "selected" : ""}>Dharan</option>
+                    <option value="Butwal" ${"Butwal".equals(request.getAttribute("location")) ? "selected" : ""}>Butwal</option>
+                    <option value="Hetauda" ${"Hetauda".equals(request.getAttribute("location")) ? "selected" : ""}>Hetauda</option>
+                    <option value="Janakpur" ${"Janakpur".equals(request.getAttribute("location")) ? "selected" : ""}>Janakpur</option>
+                </select>
             </div>
 
             <div class="form-group">

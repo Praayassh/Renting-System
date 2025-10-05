@@ -32,6 +32,10 @@
                 <i class="material-icons">vpn_key</i>
                 <span>Change Password</span>
             </a>
+            <a href="${pageContext.request.contextPath}/logout" class="settings-menu-item">
+                <i class="material-icons">exit_to_app</i>
+                <span>Logout</span>
+            </a>
         </div>
         <div class="settings-content">
             <h3>Your Post History</h3>
@@ -59,6 +63,31 @@
                                 <p class="price"><%= property.getCurrency() %> <%= String.format("%.2f", property.getPrice()) %></p>
                                 <p><strong>Status:</strong> <%= property.getStatus() %></p>
                                 <p><strong>Posted:</strong> <%= property.getPostedDate() %></p>
+                            </div>
+                            <div class="property-card-actions">
+                                <%
+                                    if ("available".equalsIgnoreCase(property.getStatus())) {
+                                %>
+                                    <form action="${pageContext.request.contextPath}/updateStatus" method="post" style="display: inline-block;">
+                                        <input type="hidden" name="propertyId" value="<%= property.getId() %>">
+                                        <input type="hidden" name="status" value="unavailable">
+                                        <button type="submit" class="unavailable-button">Mark as Unavailable</button>
+                                    </form>
+                                <%
+                                    } else {
+                                %>
+                                    <form action="${pageContext.request.contextPath}/updateStatus" method="post" style="display: inline-block;">
+                                        <input type="hidden" name="propertyId" value="<%= property.getId() %>">
+                                        <input type="hidden" name="status" value="available">
+                                        <button type="submit" class="available-button">Mark as Available</button>
+                                    </form>
+                                <%
+                                    }
+                                %>
+                                <form action="${pageContext.request.contextPath}/deleteProperty" method="post" onsubmit="return confirm('Are you sure you want to delete this post?');" style="display: inline-block;">
+                                    <input type="hidden" name="propertyId" value="<%= property.getId() %>">
+                                    <button type="submit" class="delete-button">Delete</button>
+                                </form>
                             </div>
                         </div>
                     <% } %>

@@ -66,4 +66,58 @@ public class PropertyDAO {
         }
         return properties;
     }
+
+    public List<Property> getAllProperties() {
+        List<Property> properties = new ArrayList<>();
+        String sql = "SELECT id, user_id, title, description, type, price, currency, location, image_urls, posted_date, status FROM properties ORDER BY posted_date DESC";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Property property = new Property();
+                property.setId(rs.getInt("id"));
+                property.setUserId(rs.getInt("user_id"));
+                property.setTitle(rs.getString("title"));
+                property.setDescription(rs.getString("description"));
+                property.setType(rs.getString("type"));
+                property.setPrice(rs.getDouble("price"));
+                property.setCurrency(rs.getString("currency"));
+                property.setLocation(rs.getString("location"));
+                property.setImageUrls(rs.getString("image_urls"));
+                property.setPostedDate(rs.getTimestamp("posted_date"));
+                property.setStatus(rs.getString("status"));
+                properties.add(property);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return properties;
+    }
+
+    public boolean deleteProperty(int propertyId) {
+        String sql = "DELETE FROM properties WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, propertyId);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updatePropertyStatus(int propertyId, String status) {
+        String sql = "UPDATE properties SET status = ? WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, status);
+            stmt.setInt(2, propertyId);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

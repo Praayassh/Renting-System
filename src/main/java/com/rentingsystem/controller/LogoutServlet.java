@@ -15,15 +15,13 @@ public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         if (session != null) {
-            session.invalidate(); // Invalidate the session
+            session.invalidate();
         }
-        // Redirect to the login page (application root)
         response.sendRedirect(request.getContextPath() + "/");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Optionally handle GET requests for logout, though POST is preferred for security
         doPost(request, response);
     }
 }

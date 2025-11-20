@@ -57,11 +57,5 @@
         }
     %>
 </div>
-<%-- Remove JavaScript functions for updateStatus and deletePost if they are not used elsewhere --%>
-<script>
-    // If updateStatus and deletePost are not needed anymore on this page, you can remove them.
-    // If they are used for other functionalities (e.g., admin panel), keep them in a shared JS file.
-    // For this specific page, with only an edit button, these functions are no longer directly invoked.
-</script>
 </body>
 </html>

@@ -72,9 +72,9 @@ body {
 .logout-button {
     display: block;
     width: fit-content;
-    margin: 30px auto 0 auto; /* Center button below details */
+    margin: 30px auto 0 auto;
     padding: 12px 25px;
-    background-color: #dc3545; /* Red for logout */
+    background-color: #dc3545;
     color: #fff;
     border: none;
     border-radius: 8px;

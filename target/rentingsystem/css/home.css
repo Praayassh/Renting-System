@@ -48,7 +48,7 @@ body {
 .property-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Changed from flex-start to center */
+    justify-content: center;
     gap: 20px;
     padding: 10px;
     box-sizing: border-box;
@@ -57,11 +57,11 @@ body {
 .property-list:empty {
     justify-content: center;
     align-items: center;
-    height: 200px; /* Or some appropriate height */
+    height: 200px;
 }
 
 .property-list .no-posts {
-    width: 100%; /* Ensure it takes full width to center text */
+    width: 100%;
     text-align: center;
 }
 
@@ -73,7 +73,7 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    width: calc((100% - 100px) / 5); /* (Total width - 2 paddings - 4 gaps) / 5 cards */
+    width: calc((100% - 100px) / 5);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
 }

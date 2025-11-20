@@ -36,6 +36,7 @@
                     <option value="flat" ${"flat".equals(request.getAttribute("selectedType")) ? "selected" : ""}>Flat</option>
                     <option value="room" ${"room".equals(request.getAttribute("selectedType")) ? "selected" : ""}>Room</option>
                     <option value="shop" ${"shop".equals(request.getAttribute("selectedType")) ? "selected" : ""}>Shop</option>
+                    <option value="house" ${"house".equals(request.getAttribute("selectedType")) ? "selected" : ""}>House</option>
                 </select>
                 <button type="submit">Filter</button>
             </form>
